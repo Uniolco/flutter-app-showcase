@@ -57,12 +57,12 @@ class _LoginPageState extends State<LoginPage>
                   height: Dimensions.ITEM_HEIGHT_16,
                 ),
                 stateObserver(
-                  builder: (context, state) => state.ifValid
-                      ? ElevatedButton(
-                          onPressed: () => presenter.login(),
-                          child: Text(appLocalizations.logInAction),
-                        )
-                      : const SizedBox.shrink(),
+                  builder: (context, state) => ElevatedButton(
+                    onPressed: () => state.isValid
+                        ? presenter.login()
+                        : presenter.showMissingCredentialsDialog(),
+                    child: Text(appLocalizations.logInAction),
+                  ),
                 ),
                 if (state.isLoading) const CircularProgressIndicator(),
               ],

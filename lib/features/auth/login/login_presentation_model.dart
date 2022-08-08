@@ -28,7 +28,7 @@ class LoginPresentationModel implements LoginViewModel {
   final String username;
 
   @override
-  bool get ifValid => password.isNotEmpty && username.isNotEmpty;
+  bool get isValid => password.isNotEmpty && username.isNotEmpty;
 
   @override
   bool get isLoading => loginResult.isPending();
@@ -54,5 +54,5 @@ abstract class LoginViewModel {
 
   String get password;
 
-  bool get ifValid;
+  bool get isValid;
 }

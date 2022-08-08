@@ -10,11 +10,9 @@ import 'package:flutter_demo/core/utils/mvp_extensions.dart';
 import 'package:flutter_demo/features/app_init/app_init_navigator.dart';
 import 'package:flutter_demo/features/app_init/app_init_presentation_model.dart';
 import 'package:flutter_demo/features/auth/login/login_initial_params.dart';
-import 'package:flutter_demo/features/auth/login/login_navigator.dart';
-import 'package:flutter_demo/navigation/app_navigator.dart';
 
 class AppInitPresenter extends Cubit<AppInitViewModel>
-    with CubitToCubitCommunicationMixin<AppInitViewModel>, LoginRoute {
+    with CubitToCubitCommunicationMixin<AppInitViewModel> {
   AppInitPresenter(
     AppInitPresentationModel super.model,
     this.navigator,
@@ -31,13 +29,10 @@ class AppInitPresenter extends Cubit<AppInitViewModel>
   final AppInitUseCase appInitUseCase;
   final UserStore userStore;
 
-  @override
-  AppNavigator get appNavigator => navigator.appNavigator;
-
   AppInitPresentationModel get _model => state as AppInitPresentationModel;
 
   Future<void> onInit() async {
-    await appInitUseCase
+    await await appInitUseCase
         .execute() //
         .observeStatusChanges(
           (result) => emit(
@@ -46,11 +41,7 @@ class AppInitPresenter extends Cubit<AppInitViewModel>
         )
         .asyncFold(
           (fail) => navigator.showError(fail.displayableFailure()),
-          (success) => openPage(),
+          (success) => navigator.openLogin(const LoginInitialParams()),
         );
-  }
-
-  void openPage() {
-    openLogin(const LoginInitialParams());
   }
 }
