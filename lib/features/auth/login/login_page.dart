@@ -20,8 +20,7 @@ class LoginPage extends StatefulWidget with HasPresenter<LoginPresenter> {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage>
-    with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
+class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
   @override
   void initState() {
     super.initState();
@@ -58,9 +57,7 @@ class _LoginPageState extends State<LoginPage>
                 ),
                 stateObserver(
                   builder: (context, state) => ElevatedButton(
-                    onPressed: () => state.isValid
-                        ? presenter.login()
-                        : presenter.showMissingCredentialsDialog(),
+                    onPressed: () => state.isValid ? presenter.login() : presenter.showMissingCredentialsDialog(),
                     child: Text(appLocalizations.logInAction),
                   ),
                 ),
